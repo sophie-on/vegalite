@@ -1,0 +1,60 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+  "description": "This Visualisation shows the age range of olympians from each country, as well as the average age of contestant (in red)",
+  "data":{
+      "url": "https://raw.githubusercontent.com/colmr/vis_class/master/London2012Vega.csv",
+      "format": {
+          "type": "csv"
+      }
+  },
+  "transform": [
+      {
+          "filter": "datum.Weight > 0"
+      },
+      {
+          "filter": "datum.Height > 0"
+      },
+      {
+          "filter": "datum.Total > 0"
+      }
+  ],
+  "title": {
+      "text": "Age of Olympians from each Country",
+      "anchor": "middle"
+  },
+  "width": 400,
+  "height": 900,
+  "layer":[
+      {
+
+          "mark": "tick",
+          "encoding": {
+                "y": {
+                    "field": "Country",
+                    "type": "nominal"
+                },
+                "x": {
+                    "field": "Age",
+                    "type": "quantitative"
+                }
+            }
+      },
+      {
+         "mark":  "circle",
+        "encoding": {
+            "y": {
+                "field": "Country",
+                "type": "nominal"
+            },
+             "x": {
+                "field": "Age",
+                "type": "quantitative",
+                "aggregate": "median",
+                "axis": {"title": "Age"}
+            },
+            "color": {"value": "firebrick"}
+        }
+      }
+  ]
+
+}
